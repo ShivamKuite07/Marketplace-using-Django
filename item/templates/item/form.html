@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block title %} {{title}} {% endblock title %}
+
+{% block content %}
+
+
+
+<div class="w-1/2  my-6 mx-auto p-10 bg-gray-200 text-black rounded-xl">
+    <h1 class="mb-6 text-3xl">Add New Item</h1>
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        <div class="space-y-4">
+            {{form.as_p}}
+        </div>
+    
+        {% comment %} if we got any error {% endcomment %}
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-6 p-6 bg-red-100 rounded-xl">
+                
+                {% for field in form  %}
+                    {{field.errors}}
+                {% endfor %}
+                    
+                {{form.non_field_errors}}
+            </div>
+        {% endif %}
+        <button class="py-4 px-8 text-lg bg-green-500 hover:bg-green-700 rounded-xl text-white">Add Item</button>
+    </form>
+</div>
+
+{% endblock content %}
